@@ -14,10 +14,9 @@ invert = 0;
 
 # target orbital parameters
 radius_Earth = 6378100.;  # radius of Earth [m]
-altitude = 400000.;   # orbit altitude [m]
-a = radius_Earth + altitude;    # semi major axis / orbital radius
-mu = 398600441800000.;    # gravitational parameter for Earth
-n = np.sqrt(mu/a**3.);  # orbital parameter
+radius_Moon = 1740000.; # radius of Moon [m]
+muEarth = 398600441800000.;    # gravitational parameter for Earth
+muMoon = 4904869590000.;    # gravitational parameter for Earth
 GUI_altitude_initial = 400000.0;
 GUI_planetary_initial = 1;
 
@@ -64,10 +63,12 @@ def load_orbit():
     altitude = float(ent_altitude.get()) # target altitude
     planetary = float(ent_planetary.get()) # central body
     if planetary == 1:
-        mu = 398600441800000.
+        mu = muEarth;
+        radius = radius_Earth + altitude;
     elif planetary == 2:
-        mu = 4904869590000.
-    n = np.sqrt(mu/altitude**3.);  # orbital parameter
+        mu = muMoon;
+        radius = radius_Moon + altitude;
+    n = np.sqrt(mu/radius**3.);  # orbital parameter
     print("n = ", n)
 
 ########################################################
